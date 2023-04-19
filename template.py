@@ -47,3 +47,28 @@ byte_secret_number = secret_number.decode('hex')
 plain_secret_array = []
 
 # write your code to get the plaintext of the secret numbers and on
+# Extract the key by XORing plaintext with ciphertext
+for (text_c, key_c) in zip(byte_plaintext, byte_ciphertext):
+	key.append(chr(ord(text_c) ^ ord(key_c)))
+
+# Decrypt the secret number using the extracted key
+for (text_c, key_c) in zip(byte_secret_number, key):
+	plain_secret_array.append(chr(ord(text_c) ^ ord(key_c)))
+
+print(p.readline().strip())
+p.sendline(''.join(plain_secret_array).encode('hex'))
+
+print(p.readline().strip())
+print(p.readline().strip())
+print(p.readline().strip())
+print(p.readline().strip())
+print(p.readline().strip())
+
+bytes_flag = p.readline().strip().decode('hex')
+
+plain_flag = []
+
+for (text_c, key_c) in zip(bytes_flag, key):
+        plain_flag.append(chr(ord(text_c) ^ ord(key_c)))
+
+print(''.join(plain_flag))
